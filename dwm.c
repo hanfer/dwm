@@ -1395,8 +1395,15 @@ sendmon(Client *c, Monitor *m) {
 	c->tags = m->tagset[m->seltags]; /* assign tags of target monitor */
 	attach(c);
 	attachstack(c);
+	applyrules(c);
 	focus(NULL);
 	arrange(NULL);
+
+	const Arg monarg = { .i = m->num };
+	focusmon(&monarg);
+
+	const Arg viewarg = { .i = c->tags };
+	view(&viewarg);
 }
 
 void
