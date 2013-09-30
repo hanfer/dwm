@@ -53,7 +53,7 @@
 #define MOUSEMASK               (BUTTONMASK|PointerMotionMask)
 #define WIDTH(X)                ((X)->w + 2 * (X)->bw)
 #define HEIGHT(X)               ((X)->h + 2 * (X)->bw)
-#define TAGMASK                 ((1 << LENGTH(tags)) - 1)
+#define TAGMASK                 ((1 << LENGTH(tags[selmon->num])) - 1)
 #define TEXTW(X)                (drw_font_getexts_width(drw->font, X, strlen(X)) + drw->font->h)
 
 /* enums */
@@ -427,9 +427,9 @@ buttonpress(XEvent *e) {
 	if(ev->window == selmon->barwin) {
 		i = x = 0;
 		do
-			x += TEXTW(tags[i]);
-		while(ev->x >= x && ++i < LENGTH(tags));
-		if(i < LENGTH(tags)) {
+			x += TEXTW(tags[selmon->num][i]);
+		while(ev->x >= x && ++i < LENGTH(tags[selmon->num]));
+		if(i < LENGTH(tags[selmon->num])) {
 			click = ClkTagBar;
 			arg.ui = 1 << i;
 		}
@@ -712,10 +712,10 @@ drawbar(Monitor *m) {
 			urg |= c->tags;
 	}
 	x = 0;
-	for(i = 0; i < LENGTH(tags); i++) {
-		w = TEXTW(tags[i]);
+	for(i = 0; i < LENGTH(tags[m->num]); i++) {
+		w = TEXTW(tags[m->num][i]);
 		drw_setscheme(drw, m->tagset[m->seltags] & 1 << i ? &scheme[SchemeSel] : &scheme[SchemeNorm]);
-		drw_text(drw, x, 0, w, bh, tags[i], urg & 1 << i);
+		drw_text(drw, x, 0, w, bh, tags[m->num][i], urg & 1 << i);
 		drw_rect(drw, x, 0, w, bh, m == selmon && selmon->sel && selmon->sel->tags & 1 << i,
 		           occ & 1 << i, urg & 1 << i);
 		x += w;
