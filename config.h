@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const char font[]            = "-*-terminus-medium-r-*-*-20-*-*-*-*-*-*-*";
+static const char font[]            = "-*-terminus-medium-r-*-*-12-*-*-*-*-*-*-*";
 static const char normbordercolor[] = "#3F4742";
 static const char normbgcolor[]     = "#272822";
 static const char normfgcolor[]     = "#F8F8F2";
@@ -26,7 +26,8 @@ static const Rule rules[] = {
 	{ "MPlayer",		NULL,				NULL,			0,		 	True,	    -1 },
 	{ "mpv",			NULL,				NULL,			0,		 	True,	    -1 },
 	{ "Skype",			NULL,				NULL,			1 << 7,		False,	     1 },
-	{ "noggit",			NULL,				"Noggit", 		0,		 	True,	    -1 },
+	{ "noggit",			NULL,				NULL, 			0,		 	True,	    -1 },
+	{ NULL,				NULL,				"Noggit", 		0,		 	True,	    -1 },
 	{ NULL,				"irc",				NULL,			1 << 1,		False,		 1 },
 	{ NULL,				"ranger",			NULL,			1 << 1,		False,		 2 },
 	{ NULL,				"music",			NULL,			1 << 5,		False,		 1 },
